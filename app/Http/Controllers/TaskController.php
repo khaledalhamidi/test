@@ -33,14 +33,28 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         //
-       $task= task::create(
+       $validateDate= $request->validate(
             [
-                'title'=>$request->title,
-                'description'=>$request->description,
-                'priorty'=>$request->priority
+               'title'=>'required |String |max:40',
+                'description'=>'nullable|required |String |max:40',
+                'priorty'=>'required |integer |min:1|max:5',
             ]
             );
-        return response()->json($task,200);
+            $task=Task::create($validateDate);
+                return response()->json($task,200);
+
+
+
+// store without validation
+
+    //    $task= task::create(
+    //         [
+    //             'title'=>$request->title,
+    //             'description'=>$request->description,
+    //             'priorty'=>$request->priority
+    //         ]
+    //         );
+    //     return response()->json($task,200);
     }
 
     /**
@@ -68,7 +82,14 @@ class TaskController extends Controller
     {
         //
         $task=task::findorfail($id);
-        $task->update($request->all());
+         $validateDate= $request->validate(
+            [
+               'title'=>'String |max:40',
+                'description'=>'required |String |max:40',
+                'priorty'=>'integer |min:1|max:5',
+            ]
+            );
+        $task->update($validateDate);
      return response()->json($task,201);
     }
 
