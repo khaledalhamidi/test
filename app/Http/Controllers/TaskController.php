@@ -13,7 +13,10 @@ class TaskController extends Controller
      */
     public function index()
     {
-        //
+        //return all data    v                                                                                                                                                                                                                                                                                    
+       $task= task::all();
+        return response()->json($task);
+        
     }
 
     /**
@@ -43,9 +46,11 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(task $task)
+    public function show($id)
     {
         //
+       $task= task::find($id);
+      return response()->json($task,200);
     }
 
     /**
@@ -59,16 +64,22 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, task $task)
+    public function update(Request $request, $id)
     {
         //
+        $task=task::findorfail($id);
+        $task->update($request->all());
+     return response()->json($task,201);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(task $task)
+    public function destroy($id)
     {
         //
+       $task= Task::findorfail($id);
+       $task->delete();
+   return response()->json($task,201);
     }
 }

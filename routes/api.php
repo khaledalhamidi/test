@@ -18,4 +18,11 @@ Route::get('welcome',[WelcomeController::class,'welcome']);
 Route::get('user',[UserController::class,'index']);
 // to insert into table 
 route::post('tasks',[TaskController::class,'store']);
-//if i want to return the values inserted into datebase in form of json 
+//return all value from DB
+route::get('tasks',[TaskController::class,'index']);
+//updates data  from DB
+route::put('tasks/{id}',[TaskController::class,'update']);
+//display some users
+route::get('tasks/{id}',[TaskController::class,'show']);
+//delete items 
+route::delete ('tasks/{id}',[TaskController::class,'destroy']);
