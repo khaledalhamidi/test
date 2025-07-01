@@ -16,5 +16,4 @@ Route::get('/user', function (Request $request) {
 Route::get('welcome',[WelcomeController::class,'welcome']);
 Route::get('user',[UserController::class,'index']);
 
-
 //here some changes to  make acommit on it 
