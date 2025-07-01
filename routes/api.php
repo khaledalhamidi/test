@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Http\Request;
@@ -15,5 +16,6 @@ Route::get('/user', function (Request $request) {
 // to use controller to 
 Route::get('welcome',[WelcomeController::class,'welcome']);
 Route::get('user',[UserController::class,'index']);
-
-//here some changes to  make acommit on it 
+// to insert into table 
+route::post('tasks',[TaskController::class,'store']);
+//if i want to return the values inserted into datebase in form of json 
